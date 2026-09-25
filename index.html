@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -177,6 +178,63 @@
     .notice{
       border-left:5px solid var(--gold);background:#fffdf1;padding:12px 14px;border-radius:9px;margin:12px 0;font-size:.9rem
     }
+
+    .source-intro{
+      display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;
+      background:var(--soft-gold);border:1px solid #efdc81;border-radius:15px;padding:16px;margin:18px 0;
+    }
+    .source-intro p{margin:4px 0 0;font-size:.9rem;color:#4a4d51}
+    .source-count{font-weight:900;font-size:.85rem;white-space:nowrap}
+    .source-card{
+      border:1px solid var(--line);border-radius:16px;background:#fff;margin:14px 0;overflow:hidden;
+    }
+    .source-card.recommended{border:2px solid var(--black);box-shadow:inset 0 -5px 0 var(--gold)}
+    .source-head{padding:17px 18px 12px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+    .source-icon{
+      width:38px;height:38px;border-radius:11px;background:var(--soft);display:grid;place-items:center;
+      font-weight:900;font-size:1rem
+    }
+    .source-title-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+    .source-title-row h3{margin:0}
+    .source-badge{
+      display:inline-flex;align-items:center;padding:4px 7px;border-radius:999px;font-size:.7rem;
+      font-weight:900;text-transform:uppercase;letter-spacing:.04em;background:var(--soft-gold);
+      border:1px solid #ecd66e;
+    }
+    .source-body{padding:0 18px 18px}
+    .source-body p{margin:4px 0 10px;color:#555b60;font-size:.9rem}
+    .look-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:11px 0}
+    .look-item{background:var(--soft);border-radius:9px;padding:9px 10px;font-size:.82rem}
+    .use-for{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 13px}
+    .use-tag{font-size:.73rem;font-weight:800;border-radius:999px;padding:5px 8px;background:#eef1f4}
+    .source-tools{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+    .search-link{
+      display:inline-flex;align-items:center;justify-content:center;border:1px solid #aeb5bc;border-radius:9px;
+      padding:8px 10px;background:#fff;font-size:.8rem;font-weight:800;text-decoration:none;
+    }
+    .search-link:hover{border-color:#555;background:#fafafa}
+    .source-url{margin-top:8px}
+    .finding{
+      background:#fbfcfd;border-top:1px solid var(--line);padding:15px 18px 17px;
+    }
+    .finding label{font-size:.9rem}
+    .finding textarea{min-height:72px}
+    .synthesis{
+      border:2px solid var(--black);border-radius:16px;padding:18px;margin-top:20px;background:#fff;
+    }
+    .synthesis h3{font-size:1.35rem}
+    .synthesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+    .guide-callout{
+      border-left:5px solid var(--gold);background:#fffdf1;padding:12px 14px;border-radius:9px;
+      margin:12px 0 16px;font-size:.88rem
+    }
+    .source-note{font-size:.78rem;color:var(--muted);margin-top:7px}
+    @media (max-width:650px){
+      .source-intro,.synthesis-grid{grid-template-columns:1fr}
+      .look-grid{grid-template-columns:1fr}
+      .source-count{white-space:normal}
+    }
+
     @media (max-width:860px){
       .layout{grid-template-columns:1fr}
       .side{position:static;order:-1}
@@ -267,61 +325,225 @@
         </section>
 
         <section class="panel step" id="step2" data-step="2">
-          <span class="eyebrow">5-minute school scan</span>
-          <h2>Find 3 clues — not everything.</h2>
-          <p class="lede">Look at the school or district website. About, mission, academics, student supports, news, programs, and improvement goals are usually enough.</p>
+          <span class="eyebrow">Guided school search</span>
+          <h2>Know where to look — and what each source is good for.</h2>
+          <p class="lede">You are not trying to collect everything you can find. Use the sources below to answer a few specific questions that will actually help you prepare.</p>
 
-          <div class="mission">
-            <strong>Your mission</strong>
-            Find one clue about <b>who they serve</b>, one about <b>what seems important here</b>, and one thing that makes you <b>curious</b>.
+          <div class="source-intro">
+            <div>
+              <strong id="sourceGoalMessage">Start with the sources marked “Start here.”</strong>
+              <p>You usually only need <b>2–4 useful findings</b>. Stop when you have enough to make your materials, interview answers, or student-teaching questions more specific.</p>
+            </div>
+            <div class="source-count" id="sourceCount">0 useful findings saved</div>
           </div>
 
-          <div class="clue">
-            <div class="clue-head"><div class="num">1</div><div><h3>Who do they serve?</h3><div class="hint">Capture one detail that would help you understand the students or community.</div></div></div>
-            <div class="field">
-              <label for="studentCommunity">What did you notice?</label>
-              <textarea id="studentCommunity" placeholder="Example: The school serves a large multilingual student population and highlights family partnerships throughout its site."></textarea>
+          <div class="source-card" id="jobSourceCard" data-source="job">
+            <div class="source-head">
+              <div class="source-icon">1</div>
+              <div>
+                <div class="source-title-row">
+                  <h3>Job posting or placement description</h3>
+                  <span class="source-badge source-recommend" hidden>Start here</span>
+                </div>
+                <div class="hint">Best source for figuring out what this specific role is asking you to show.</div>
+              </div>
             </div>
-            <div class="field">
-              <label for="studentCommunityWhy">Why could that matter for someone teaching here?</label>
-              <textarea id="studentCommunityWhy" placeholder="Example: I would want to learn how teachers communicate with families and support students across languages."></textarea>
+            <div class="source-body">
+              <p><strong>Look for:</strong></p>
+              <div class="look-grid">
+                <div class="look-item">Repeated responsibilities or skills</div>
+                <div class="look-item">Grade, content area, or learner needs</div>
+                <div class="look-item">Preferred experience or qualifications</div>
+                <div class="look-item">Words describing teaching, collaboration, or support</div>
+              </div>
+              <div class="use-for">
+                <span class="use-tag">Tailoring</span>
+                <span class="use-tag">Cover letters</span>
+                <span class="use-tag">Interview examples</span>
+              </div>
+              <div class="field source-url">
+                <label for="jobPostingUrl">Posting or placement link <span class="micro">(optional)</span></label>
+                <input id="jobPostingUrl" type="url" inputmode="url" placeholder="Paste the posting link if you have one" />
+              </div>
+              <div class="source-tools">
+                <a class="search-link" id="jobSearchLink" href="#" target="_blank" rel="noopener">Search for the role ↗</a>
+              </div>
+              <div class="source-note">For student teaching, this may be a placement email or description instead of a job posting. If you do not have one, skip this source.</div>
             </div>
-            <div class="notice">Use school information as context, not as a shortcut for assumptions about individual students.</div>
+            <div class="finding">
+              <label for="jobFinding">One thing from this source that should affect how I prepare</label>
+              <textarea id="jobFinding" placeholder="Example: The posting emphasizes collaborative planning and differentiating instruction."></textarea>
+            </div>
           </div>
 
-          <div class="clue">
-            <div class="clue-head"><div class="num">2</div><div><h3>What seems important here?</h3><div class="hint">Look for a priority, program, teaching approach, or theme that shows up more than once.</div></div></div>
-            <div class="chips" aria-label="Priority ideas">
-              <button class="chip" type="button" aria-pressed="false">Literacy</button>
-              <button class="chip" type="button" aria-pressed="false">Math</button>
-              <button class="chip" type="button" aria-pressed="false">STEM</button>
-              <button class="chip" type="button" aria-pressed="false">Inclusive practices</button>
-              <button class="chip" type="button" aria-pressed="false">Special education</button>
-              <button class="chip" type="button" aria-pressed="false">Multilingual learners</button>
-              <button class="chip" type="button" aria-pressed="false">Student wellbeing</button>
-              <button class="chip" type="button" aria-pressed="false">College & career readiness</button>
-              <button class="chip" type="button" aria-pressed="false">Project-based learning</button>
-              <button class="chip" type="button" aria-pressed="false">Technology</button>
-              <button class="chip" type="button" aria-pressed="false">Family engagement</button>
-              <button class="chip" type="button" aria-pressed="false">Community partnerships</button>
+          <div class="source-card" id="schoolSourceCard" data-source="school">
+            <div class="source-head">
+              <div class="source-icon">2</div>
+              <div>
+                <div class="source-title-row">
+                  <h3>School website</h3>
+                  <span class="source-badge source-recommend" hidden>Start here</span>
+                </div>
+                <div class="hint">Best source for what is distinctive about this school.</div>
+              </div>
             </div>
-            <div class="field">
-              <label for="schoolPriority">The clue I want to remember</label>
-              <textarea id="schoolPriority" placeholder="Example: Their strategic plan repeatedly emphasizes collaborative learning and student voice."></textarea>
+            <div class="source-body">
+              <p><strong>Where to click:</strong></p>
+              <div class="look-grid">
+                <div class="look-item"><b>About / principal message:</b> identity, values, community</div>
+                <div class="look-item"><b>Academics / programs:</b> teaching approaches and special programs</div>
+                <div class="look-item"><b>Student support:</b> MTSS, special education, multilingual learners, wellbeing</div>
+                <div class="look-item"><b>News / calendar:</b> what is happening right now</div>
+              </div>
+              <div class="use-for">
+                <span class="use-tag">Why this school?</span>
+                <span class="use-tag">Cover-letter connection</span>
+                <span class="use-tag">Student-teaching context</span>
+              </div>
+              <div class="source-tools">
+                <a class="search-link" id="schoolSearchLink" href="#" target="_blank" rel="noopener">Find the school website ↗</a>
+                <a class="search-link" id="schoolNewsSearchLink" href="#" target="_blank" rel="noopener">Search recent school news ↗</a>
+              </div>
+            </div>
+            <div class="finding">
+              <label for="schoolFinding">What seems especially important or distinctive about this school?</label>
+              <textarea id="schoolFinding" placeholder="Example: The school highlights student voice, collaborative learning, and family partnerships across several pages."></textarea>
             </div>
           </div>
 
-          <div class="clue">
-            <div class="clue-head"><div class="num">3</div><div><h3>What makes you curious?</h3><div class="hint">You do not have to find every answer online. Notice what you would want to learn from a real person.</div></div></div>
-            <div class="field">
-              <label for="curiosity">Something I want to understand better</label>
-              <textarea id="curiosity" placeholder="Example: The site mentions a school-wide mentoring program, but I want to know what teacher involvement looks like."></textarea>
+          <div class="source-card" id="districtSourceCard" data-source="district">
+            <div class="source-head">
+              <div class="source-icon">3</div>
+              <div>
+                <div class="source-title-row">
+                  <h3>District website</h3>
+                  <span class="source-badge source-recommend" hidden>Start here</span>
+                </div>
+                <div class="hint">Best source for the bigger priorities teachers across the district are working within.</div>
+              </div>
+            </div>
+            <div class="source-body">
+              <p><strong>Where to click:</strong></p>
+              <div class="look-grid">
+                <div class="look-item"><b>Strategic plan / goals:</b> district-wide priorities</div>
+                <div class="look-item"><b>Teaching & learning:</b> curriculum or instructional approach</div>
+                <div class="look-item"><b>Student services:</b> support systems and learner needs</div>
+                <div class="look-item"><b>Careers / HR:</b> educator expectations or professional learning</div>
+              </div>
+              <div class="use-for">
+                <span class="use-tag">Interview preparation</span>
+                <span class="use-tag">District-level tailoring</span>
+                <span class="use-tag">Understanding expectations</span>
+              </div>
+              <div class="field source-url">
+                <label for="districtWebsiteUrl">District website <span class="micro">(optional)</span></label>
+                <input id="districtWebsiteUrl" type="url" inputmode="url" placeholder="Paste the district website if you have it" />
+              </div>
+              <div class="source-tools">
+                <a class="search-link" id="districtSearchLink" href="#" target="_blank" rel="noopener">Find the district website ↗</a>
+                <a class="search-link" id="districtPlanSearchLink" href="#" target="_blank" rel="noopener">Find strategic plan / goals ↗</a>
+              </div>
+            </div>
+            <div class="finding">
+              <label for="districtFinding">What district priority or expectation seems relevant to you?</label>
+              <textarea id="districtFinding" placeholder="Example: The district's strategic plan emphasizes inclusive instruction and strong school-family partnerships."></textarea>
+            </div>
+          </div>
+
+          <div class="source-card" id="recentSourceCard" data-source="recent">
+            <div class="source-head">
+              <div class="source-icon">4</div>
+              <div>
+                <div class="source-title-row">
+                  <h3>Recent news, calendar, or social media</h3>
+                  <span class="source-badge source-recommend" hidden>Start here</span>
+                </div>
+                <div class="hint">Best source for seeing what the school is actually talking about and doing right now.</div>
+              </div>
+            </div>
+            <div class="source-body">
+              <p><strong>Look for:</strong></p>
+              <div class="look-grid">
+                <div class="look-item">Recent classroom or school-wide projects</div>
+                <div class="look-item">Family or community events</div>
+                <div class="look-item">Student activities and celebrations</div>
+                <div class="look-item">Programs or priorities that keep appearing</div>
+              </div>
+              <div class="use-for">
+                <span class="use-tag">Current interview examples</span>
+                <span class="use-tag">Questions to ask</span>
+                <span class="use-tag">School culture clues</span>
+              </div>
+              <div class="source-tools">
+                <a class="search-link" id="socialSearchLink" href="#" target="_blank" rel="noopener">Search school social media ↗</a>
+                <a class="search-link" id="recentSearchLink" href="#" target="_blank" rel="noopener">Search recent updates ↗</a>
+              </div>
+              <div class="source-note">Social media is curated. Use it to notice current activities and generate questions—not to assume it shows the whole school experience.</div>
+            </div>
+            <div class="finding">
+              <label for="recentFinding">What recent example helps make the school feel more concrete?</label>
+              <textarea id="recentFinding" placeholder="Example: Recent posts show several grade levels using project-based learning and inviting families to student showcases."></textarea>
+            </div>
+          </div>
+
+          <div class="source-card" id="contextSourceCard" data-source="context">
+            <div class="source-head">
+              <div class="source-icon">5</div>
+              <div>
+                <div class="source-title-row">
+                  <h3>School profile or public data <span class="micro">(optional)</span></h3>
+                  <span class="source-badge source-recommend" hidden>Helpful here</span>
+                </div>
+                <div class="hint">Useful for basic context about the students and community—not for deciding what individual students will be like.</div>
+              </div>
+            </div>
+            <div class="source-body">
+              <p><strong>Useful context might include:</strong></p>
+              <div class="look-grid">
+                <div class="look-item">Enrollment and grade levels</div>
+                <div class="look-item">Languages represented</div>
+                <div class="look-item">Programs or service models</div>
+                <div class="look-item">Community or geographic context</div>
+              </div>
+              <div class="use-for">
+                <span class="use-tag">Student-teaching preparation</span>
+                <span class="use-tag">Questions about support</span>
+                <span class="use-tag">Understanding context</span>
+              </div>
+              <div class="source-tools">
+                <a class="search-link" id="profileSearchLink" href="#" target="_blank" rel="noopener">Search for a school profile ↗</a>
+              </div>
+              <div class="source-note">Treat performance numbers and demographics as limited context. They are more useful for asking thoughtful questions than for making conclusions about students, teachers, or school quality.</div>
+            </div>
+            <div class="finding">
+              <label for="studentCommunity">One piece of context worth knowing before I walk in</label>
+              <textarea id="studentCommunity" placeholder="Example: The school serves K–6 students and offers both multilingual learner support and a dual-language program."></textarea>
+            </div>
+          </div>
+
+          <div class="synthesis">
+            <h3>Now pull the useful pieces together.</h3>
+            <p class="hint">Do not summarize every source. Decide what actually matters for your next step.</p>
+
+            <div class="synthesis-grid">
+              <div class="field">
+                <label for="schoolPriority">The strongest priority or theme I see</label>
+                <textarea id="schoolPriority" placeholder="What appears important across the sources you checked?"></textarea>
+              </div>
+              <div class="field">
+                <label for="curiosity">Something I still want to understand</label>
+                <textarea id="curiosity" placeholder="Turn a gap in your research into a useful interview or student-teaching question."></textarea>
+              </div>
+            </div>
+
+            <div class="guide-callout" id="goalSynthesisTip">
+              Your strongest finding should be something you can actually use in the next step—not simply an interesting fact about the school.
             </div>
           </div>
 
           <div class="buttons">
             <button class="btn ghost" type="button" data-back="1">← Back</button>
-            <button class="btn primary" type="button" data-next="3">Make this useful →</button>
+            <button class="btn primary" type="button" data-next="3">Connect this to me →</button>
           </div>
         </section>
 
@@ -439,7 +661,7 @@
 
           <div class="success">
             <strong>Your school prep is saved for the other Education resources.</strong>
-            When the cover-letter, tailoring, or interview tools are connected to the same shared data layer, they can offer to pull these school-specific details in automatically.
+            Your school, role, strongest priority, student/community context, personal connection, and goal-specific prep are saved in the shared Education data layer so connected tools can offer to reuse them.
           </div>
 
           <div class="final-grid">
@@ -488,7 +710,7 @@
             <p id="snapRole">Your useful details will build here as you go.</p>
           </div>
           <div class="snapshot-body">
-            <div class="snap-group"><div class="snap-label">Who they serve</div><div class="snap-value snap-empty" id="snapCommunity">Add your first clue.</div></div>
+            <div class="snap-group"><div class="snap-label">Useful student/community context</div><div class="snap-value snap-empty" id="snapCommunity">Add context only if it helps you prepare.</div></div>
             <div class="snap-group"><div class="snap-label">What seems important</div><div class="snap-value snap-empty" id="snapPriority">Add a school priority.</div></div>
             <div class="snap-group"><div class="snap-label">My connection</div><div class="snap-value snap-empty" id="snapConnection">Connect it to what you bring.</div></div>
             <div class="snap-group"><div class="snap-label">I want to know</div><div class="snap-value snap-empty" id="snapCuriosity">Save something you're curious about.</div></div>
@@ -706,7 +928,8 @@
 
       const $ = (id) => document.getElementById(id);
       const fields = [
-        'schoolName','districtName','role','website','studentCommunity','studentCommunityWhy',
+        'schoolName','districtName','role','website','jobPostingUrl','districtWebsiteUrl',
+        'jobFinding','schoolFinding','districtFinding','recentFinding','studentCommunity',
         'schoolPriority','curiosity','personalConnection','applicationEmphasis','interviewWhy',
         'interviewExample','interviewQuestion','studentTeachingWatch','studentTeachingQuestion',
         'fitAppeal','fitQuestion','fitFactor'
@@ -759,7 +982,7 @@
       function updateSnapshot() {
         setText('snapSchool', value('schoolName'), 'Your School Prep Card');
         setText('snapRole', value('role'), 'Your useful details will build here as you go.');
-        setText('snapCommunity', value('studentCommunity'), 'Add your first clue.');
+        setText('snapCommunity', value('studentCommunity'), 'Add context only if it helps you prepare.');
         setText('snapPriority', value('schoolPriority'), 'Add a school priority.');
         setText('snapConnection', value('personalConnection'), 'Connect it to what you bring.');
         setText('snapCuriosity', value('curiosity'), "Save something you're curious about.");
@@ -779,6 +1002,11 @@
         $('progressBar').style.width = (step * 20) + '%';
         const names = ['Choose your goal','Scan the school','Make a connection','Build your prep','Your School Prep Card'];
         $('progressLabel').textContent = `Step ${step} of 5 · ${names[step-1]}`;
+        if (step === 2) {
+          updateSourceLinks();
+          updateSourceGuidance();
+          updateSourceCount();
+        }
         if (step === 3) {
           $('priorityEcho').textContent = value('schoolPriority') || 'Choose the school clue you want to connect to.';
           loadExperienceBankHint();
@@ -787,6 +1015,79 @@
         if (step === 5) renderFinal();
         save();
         window.scrollTo({top:0,behavior:'smooth'});
+      }
+
+
+      function searchUrl(query) {
+        return 'https://www.google.com/search?q=' + encodeURIComponent(query);
+      }
+
+      function updateSourceLinks() {
+        const school = value('schoolName') || 'school';
+        const district = value('districtName') || school;
+        const roleName = value('role') || 'teacher';
+
+        const links = {
+          jobSearchLink: `${school} ${district} ${roleName} job posting`,
+          schoolSearchLink: `${school} ${district} official school website`,
+          schoolNewsSearchLink: `${school} ${district} school news`,
+          districtSearchLink: `${district} official school district website`,
+          districtPlanSearchLink: `${district} strategic plan teaching learning goals`,
+          socialSearchLink: `${school} ${district} Facebook Instagram`,
+          recentSearchLink: `${school} ${district} recent news events`,
+          profileSearchLink: `${school} ${district} school profile enrollment demographics`
+        };
+        Object.entries(links).forEach(([id, q]) => {
+          const el = $(id);
+          if (el) el.href = searchUrl(q);
+        });
+      }
+
+      function updateSourceGuidance() {
+        const goal = state.goal || 'application';
+        const order = {
+          application: ['job','school','district','recent'],
+          interview: ['school','job','district','recent'],
+          studentTeaching: ['school','context','recent','district'],
+          exploring: ['school','recent','district','context']
+        }[goal];
+
+        const messages = {
+          application: 'For an application, start with the job posting, then check the school and district for details that make your tailoring specific.',
+          interview: 'For an interview, start with the school itself, then connect what you find to the posting and district priorities.',
+          studentTeaching: 'For student teaching, start with the school and student/community context, then use recent updates and district resources to know what to watch for.',
+          exploring: 'For exploration, start with the school, then use recent activity and district context to decide what you want to learn next.'
+        };
+        $('sourceGoalMessage').textContent = messages[goal];
+
+        document.querySelectorAll('.source-card').forEach(card => {
+          card.classList.remove('recommended');
+          const badge = card.querySelector('.source-recommend');
+          if (badge) badge.hidden = true;
+        });
+
+        order.slice(0,2).forEach(source => {
+          const card = document.querySelector(`.source-card[data-source="${source}"]`);
+          if (card) {
+            card.classList.add('recommended');
+            const badge = card.querySelector('.source-recommend');
+            if (badge) badge.hidden = false;
+          }
+        });
+
+        const tips = {
+          application: 'Ask: “What should I prove or emphasize because I am applying to THIS role at THIS school?”',
+          interview: 'Ask: “What will help me answer why I am interested, choose better examples, and ask a school-specific question?”',
+          studentTeaching: 'Ask: “What context will help me notice more, ask better questions, and enter the placement ready to learn?”',
+          exploring: 'Ask: “What here genuinely interests me, and what would I need to know before deciding whether this environment fits me?”'
+        };
+        $('goalSynthesisTip').textContent = tips[goal];
+      }
+
+      function updateSourceCount() {
+        const ids = ['jobFinding','schoolFinding','districtFinding','recentFinding','studentCommunity'];
+        const count = ids.filter(id => !!value(id)).length;
+        $('sourceCount').textContent = `${count} useful finding${count === 1 ? '' : 's'} saved`;
       }
 
       function renderPath() {
@@ -848,8 +1149,13 @@
           if (!value('schoolName')) return fail('Add the school or district you are researching.');
         }
         if (step === 2) {
-          if (!value('studentCommunity') || !value('schoolPriority') || !value('curiosity')) {
-            return fail('Add one useful clue in each section before moving on.');
+          const sourceFindings = ['jobFinding','schoolFinding','districtFinding','recentFinding','studentCommunity']
+            .filter(id => !!value(id)).length;
+          if (sourceFindings < 2) {
+            return fail('Save at least two useful findings from the guided sources before moving on.');
+          }
+          if (!value('schoolPriority') || !value('curiosity')) {
+            return fail('Name the strongest priority/theme you found and one thing you still want to understand.');
           }
         }
         if (step === 3 && !value('personalConnection')) {
@@ -900,7 +1206,6 @@
 
         fields.forEach(id => { if ($(id)) $(id).value = ''; });
         document.querySelectorAll('.choice').forEach(el => {el.classList.remove('selected'); el.setAttribute('aria-checked','false');});
-        document.querySelectorAll('.chip').forEach(el => el.setAttribute('aria-pressed','false'));
         document.querySelectorAll('input[name="connectionType"]').forEach(el => el.checked = false);
         if (window.EducationResourceData) window.EducationResourceData.clearSchoolResearchCurrent();
         updateSnapshot();
@@ -941,6 +1246,7 @@
             x.classList.toggle('selected', selected);
             x.setAttribute('aria-checked', selected ? 'true' : 'false');
           });
+          updateSourceGuidance();
           save();
         });
       });
@@ -969,6 +1275,8 @@
         if (!el) return;
         el.addEventListener('input', () => {
           updateSnapshot();
+          if (['schoolName','districtName','role'].includes(id)) updateSourceLinks();
+          if (['jobFinding','schoolFinding','districtFinding','recentFinding','studentCommunity'].includes(id)) updateSourceCount();
           clearTimeout(el._saveTimer);
           el._saveTimer = setTimeout(() => save(), 250);
         });
