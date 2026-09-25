@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Get Ready for This School</title>
+  <meta name="description" content="A College of Education school research activity for applications, interviews, and student teaching preparation." />
+  <style>
+    :root{
+      --gold:#FFCD00;
+      --black:#151515;
+      --ink:#222;
+      --muted:#5f6368;
+      --paper:#fff;
+      --soft:#f6f7f8;
+      --soft-gold:#fff8d8;
+      --line:#d9dde2;
+      --blue-soft:#eaf4ff;
+      --green-soft:#ecf8ef;
+      --violet-soft:#f4efff;
+      --coral-soft:#fff0eb;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Roboto,Arial,Helvetica,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#fff 0,#fbfbfb 100%);
+      line-height:1.45;
+    }
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    a{color:inherit}
+    .shell{max-width:var(--max);margin:0 auto;padding:26px 20px 56px}
+    .hero{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:18px;
+      align-items:end;
+      border-bottom:5px solid var(--gold);
+      padding:14px 0 22px;
+      margin-bottom:22px;
+    }
+    h1,h2,h3,.display{
+      font-family:"Arial Narrow",Impact,Arial,sans-serif;
+      letter-spacing:.01em;
+      line-height:1.03;
+      margin:0;
+      color:var(--black);
+    }
+    h1{font-size:clamp(2rem,5vw,4rem);max-width:820px}
+    h2{font-size:clamp(1.6rem,3.4vw,2.6rem)}
+    h3{font-size:1.22rem}
+    .hero p{margin:12px 0 0;max-width:760px;font-size:1.06rem;color:#3f4348}
+    .saved-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:9px 12px;border-radius:999px;background:var(--green-soft);
+      border:1px solid #cce8d2;font-weight:700;font-size:.88rem;white-space:nowrap;
+    }
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:26px;align-items:start}
+    .main{min-width:0}
+    .side{position:sticky;top:18px}
+    .progress-wrap{
+      background:#eceff1;border-radius:999px;height:9px;overflow:hidden;margin:0 0 8px;
+    }
+    .progress{height:100%;background:var(--gold);width:20%;transition:width .25s ease}
+    .progress-label{font-size:.84rem;font-weight:700;color:var(--muted);margin-bottom:18px}
+    .panel{
+      background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:0 4px 18px rgba(0,0,0,.045);padding:24px;margin-bottom:18px;
+    }
+    .step{display:none}
+    .step.active{display:block}
+    .eyebrow{
+      display:inline-block;background:var(--soft-gold);padding:6px 9px;border-radius:7px;
+      font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.055em;margin-bottom:10px;
+    }
+    .lede{font-size:1.04rem;color:#464b50;margin:10px 0 22px;max-width:720px}
+    .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .choice{
+      border:2px solid var(--line);background:#fff;border-radius:14px;padding:17px;text-align:left;
+      min-height:116px;transition:.18s ease;position:relative;
+    }
+    .choice:hover,.choice:focus-visible{border-color:#8b8f94;transform:translateY(-1px);outline:none}
+    .choice.selected{border-color:var(--black);box-shadow:inset 0 -5px 0 var(--gold)}
+    .choice strong{display:block;font-size:1rem;margin-bottom:5px}
+    .choice span{font-size:.9rem;color:var(--muted)}
+    .field{margin:17px 0}
+    label{display:block;font-weight:800;margin-bottom:7px}
+    .hint{font-size:.87rem;color:var(--muted);margin:5px 0 0}
+    input[type="text"],input[type="url"],textarea{
+      width:100%;border:1.5px solid #b8bec5;border-radius:10px;padding:12px 13px;background:#fff;color:var(--ink)
+    }
+    textarea{min-height:92px;resize:vertical}
+    input:focus,textarea:focus{outline:3px solid rgba(255,205,0,.45);border-color:#5c5f62}
+    .mission{
+      background:var(--soft-gold);border:1px solid #f0dd86;border-radius:14px;padding:17px;margin:20px 0;
+    }
+    .mission strong{display:block;margin-bottom:6px}
+    .clue{
+      border:1px solid var(--line);border-radius:15px;padding:18px;margin:14px 0;background:#fff;
+    }
+    .clue:nth-of-type(1){border-left:6px solid #9cc9f1}
+    .clue:nth-of-type(2){border-left:6px solid #b4dfbd}
+    .clue:nth-of-type(3){border-left:6px solid #d7c5fa}
+    .clue-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px}
+    .num{
+      width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--black);
+      color:#fff;font-weight:900;flex:0 0 auto
+    }
+    .chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+    .chip{
+      border:1px solid #bcc2c8;background:#fff;border-radius:999px;padding:8px 10px;font-size:.84rem
+    }
+    .chip[aria-pressed="true"]{background:var(--black);color:#fff;border-color:var(--black)}
+    .connection-options{display:grid;gap:9px;margin:14px 0}
+    .connection-option{
+      display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;
+    }
+    .connection-option input{margin-top:4px;accent-color:var(--black)}
+    .path-card{
+      border-radius:16px;padding:18px;margin:14px 0;border:1px solid var(--line)
+    }
+    .path-card.application{background:var(--blue-soft)}
+    .path-card.interview{background:var(--green-soft)}
+    .path-card.student{background:var(--violet-soft)}
+    .path-card.explore{background:var(--coral-soft)}
+    .auto{
+      border:1px dashed #969ca3;background:rgba(255,255,255,.72);border-radius:10px;padding:11px 12px;
+      margin:7px 0 14px;font-size:.92rem
+    }
+    .auto em{color:var(--muted)}
+    .buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .btn{
+      border:2px solid var(--black);border-radius:10px;padding:11px 16px;font-weight:900;background:#fff;color:var(--black)
+    }
+    .btn.primary{background:var(--black);color:#fff}
+    .btn.primary:hover{background:#333}
+    .btn.gold{background:var(--gold);color:var(--black);border-color:var(--black)}
+    .btn.ghost{border-color:#c4c9cf;color:#45494d}
+    .btn:focus-visible{outline:3px solid rgba(255,205,0,.65);outline-offset:2px}
+    .snapshot{
+      background:var(--black);color:#fff;border-radius:18px;box-shadow:var(--shadow);overflow:hidden
+    }
+    .snapshot-top{padding:18px 19px;border-bottom:4px solid var(--gold)}
+    .snapshot-top h3{color:#fff;font-size:1.45rem}
+    .snapshot-top p{margin:6px 0 0;color:#d8dadd;font-size:.88rem}
+    .snapshot-body{padding:17px 19px}
+    .snap-group{padding:12px 0;border-bottom:1px solid #3a3a3a}
+    .snap-group:last-child{border-bottom:0}
+    .snap-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#bfc3c7;font-weight:900;margin-bottom:4px}
+    .snap-value{font-size:.92rem;white-space:pre-wrap}
+    .snap-empty{color:#9fa3a7;font-style:italic}
+    .handoff{
+      margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px
+    }
+    .handoff h3{font-size:1rem;margin-bottom:6px}
+    .handoff p{font-size:.82rem;color:var(--muted);margin:0 0 10px}
+    .handoff-item{display:flex;align-items:center;gap:8px;font-size:.82rem;margin:7px 0}
+    .dot{width:9px;height:9px;border-radius:50%;background:#b7bcc1}
+    .dot.ready{background:#3c8e52}
+    .success{
+      border:1px solid #b8dec1;background:var(--green-soft);border-radius:14px;padding:16px;margin:16px 0
+    }
+    .success strong{display:block;margin-bottom:4px}
+    .final-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}
+    .final-tile{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fff}
+    .final-tile strong{display:block;margin-bottom:6px}
+    .micro{font-size:.8rem;color:var(--muted)}
+    .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .top-actions{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px}
+    .text-btn{background:none;border:0;text-decoration:underline;font-size:.83rem;color:#555;padding:5px}
+    .notice{
+      border-left:5px solid var(--gold);background:#fffdf1;padding:12px 14px;border-radius:9px;margin:12px 0;font-size:.9rem
+    }
+    @media (max-width:860px){
+      .layout{grid-template-columns:1fr}
+      .side{position:static;order:-1}
+      .snapshot{display:none}
+      .handoff{display:none}
+      .hero{grid-template-columns:1fr}
+      .saved-pill{justify-self:start}
+    }
+    @media (max-width:610px){
+      .shell{padding:16px 12px 40px}
+      .panel{padding:18px 15px}
+      .choice-grid,.final-grid{grid-template-columns:1fr}
+      .choice{min-height:0}
+      .btn{width:100%}
+    }
+    @media print{
+      body{background:#fff}
+      .hero,.progress-wrap,.progress-label,.buttons,.top-actions,.side,.step:not(.active){display:none!important}
+      .layout{display:block}
+      .panel{box-shadow:none;border:0;padding:0}
+      #step5{display:block!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div>
+        <h1>Get Ready for This School</h1>
+        <p>Find the few things worth knowing, connect them to what you bring, and leave with material you can use for applications, interviews, or student teaching.</p>
+      </div>
+      <div class="saved-pill" id="saveStatus" aria-live="polite">● Saved on this device</div>
+    </header>
+
+    <div class="layout">
+      <main class="main">
+        <div class="top-actions">
+          <button class="text-btn" type="button" id="startOverBtn">Start another school</button>
+        </div>
+
+        <div class="progress-wrap" aria-hidden="true"><div class="progress" id="progressBar"></div></div>
+        <div class="progress-label" id="progressLabel">Step 1 of 5 · Choose your goal</div>
+
+        <section class="panel step active" id="step1" data-step="1">
+          <span class="eyebrow">Start with your goal</span>
+          <h2>What are you getting ready for?</h2>
+          <p class="lede">Your answer changes what the tool helps you build. You can still reuse this research in the other Education resources later.</p>
+
+          <div class="choice-grid" role="radiogroup" aria-label="Preparation goal">
+            <button type="button" class="choice" data-goal="application" role="radio" aria-checked="false">
+              <strong>Applying</strong>
+              <span>Find school-specific details you can use to tailor a cover letter or application.</span>
+            </button>
+            <button type="button" class="choice" data-goal="interview" role="radio" aria-checked="false">
+              <strong>Interviewing</strong>
+              <span>Build stronger “why this school?” points, examples, and questions to ask.</span>
+            </button>
+            <button type="button" class="choice" data-goal="studentTeaching" role="radio" aria-checked="false">
+              <strong>Student Teaching / Practicum</strong>
+              <span>Arrive with useful context and a few things you want to notice or ask about.</span>
+            </button>
+            <button type="button" class="choice" data-goal="exploring" role="radio" aria-checked="false">
+              <strong>Just Exploring</strong>
+              <span>Learn enough to decide what interests you and what you would want to know next.</span>
+            </button>
+          </div>
+
+          <div class="field">
+            <label for="schoolName">School or district</label>
+            <input id="schoolName" type="text" autocomplete="organization" placeholder="Example: Lincoln Elementary School" />
+          </div>
+          <div class="field">
+            <label for="districtName">District <span class="micro">(optional)</span></label>
+            <input id="districtName" type="text" placeholder="Example: Iowa City Community School District" />
+          </div>
+          <div class="field">
+            <label for="role">Role, grade level, or area</label>
+            <input id="role" type="text" placeholder="Example: 3rd Grade Teacher or Elementary Student Teaching" />
+          </div>
+          <div class="field">
+            <label for="website">School or district website <span class="micro">(optional)</span></label>
+            <input id="website" type="url" inputmode="url" placeholder="https://..." />
+          </div>
+
+          <div class="buttons">
+            <button class="btn primary" type="button" data-next="2">Start my school scan →</button>
+          </div>
+        </section>
+
+        <section class="panel step" id="step2" data-step="2">
+          <span class="eyebrow">5-minute school scan</span>
+          <h2>Find 3 clues — not everything.</h2>
+          <p class="lede">Look at the school or district website. About, mission, academics, student supports, news, programs, and improvement goals are usually enough.</p>
+
+          <div class="mission">
+            <strong>Your mission</strong>
+            Find one clue about <b>who they serve</b>, one about <b>what seems important here</b>, and one thing that makes you <b>curious</b>.
+          </div>
+
+          <div class="clue">
+            <div class="clue-head"><div class="num">1</div><div><h3>Who do they serve?</h3><div class="hint">Capture one detail that would help you understand the students or community.</div></div></div>
+            <div class="field">
+              <label for="studentCommunity">What did you notice?</label>
+              <textarea id="studentCommunity" placeholder="Example: The school serves a large multilingual student population and highlights family partnerships throughout its site."></textarea>
+            </div>
+            <div class="field">
+              <label for="studentCommunityWhy">Why could that matter for someone teaching here?</label>
+              <textarea id="studentCommunityWhy" placeholder="Example: I would want to learn how teachers communicate with families and support students across languages."></textarea>
+            </div>
+            <div class="notice">Use school information as context, not as a shortcut for assumptions about individual students.</div>
+          </div>
+
+          <div class="clue">
+            <div class="clue-head"><div class="num">2</div><div><h3>What seems important here?</h3><div class="hint">Look for a priority, program, teaching approach, or theme that shows up more than once.</div></div></div>
+            <div class="chips" aria-label="Priority ideas">
+              <button class="chip" type="button" aria-pressed="false">Literacy</button>
+              <button class="chip" type="button" aria-pressed="false">Math</button>
+              <button class="chip" type="button" aria-pressed="false">STEM</button>
+              <button class="chip" type="button" aria-pressed="false">Inclusive practices</button>
+              <button class="chip" type="button" aria-pressed="false">Special education</button>
+              <button class="chip" type="button" aria-pressed="false">Multilingual learners</button>
+              <button class="chip" type="button" aria-pressed="false">Student wellbeing</button>
+              <button class="chip" type="button" aria-pressed="false">College & career readiness</button>
+              <button class="chip" type="button" aria-pressed="false">Project-based learning</button>
+              <button class="chip" type="button" aria-pressed="false">Technology</button>
+              <button class="chip" type="button" aria-pressed="false">Family engagement</button>
+              <button class="chip" type="button" aria-pressed="false">Community partnerships</button>
+            </div>
+            <div class="field">
+              <label for="schoolPriority">The clue I want to remember</label>
+              <textarea id="schoolPriority" placeholder="Example: Their strategic plan repeatedly emphasizes collaborative learning and student voice."></textarea>
+            </div>
+          </div>
+
+          <div class="clue">
+            <div class="clue-head"><div class="num">3</div><div><h3>What makes you curious?</h3><div class="hint">You do not have to find every answer online. Notice what you would want to learn from a real person.</div></div></div>
+            <div class="field">
+              <label for="curiosity">Something I want to understand better</label>
+              <textarea id="curiosity" placeholder="Example: The site mentions a school-wide mentoring program, but I want to know what teacher involvement looks like."></textarea>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn ghost" type="button" data-back="1">← Back</button>
+            <button class="btn primary" type="button" data-next="3">Make this useful →</button>
+          </div>
+        </section>
+
+        <section class="panel step" id="step3" data-step="3">
+          <span class="eyebrow">Make the connection</span>
+          <h2>What do you bring to this?</h2>
+          <p class="lede">Choose the school clue that feels most relevant. Then connect it to an experience, a related strength, or something you genuinely want to learn.</p>
+
+          <div class="auto">
+            <strong>School clue:</strong>
+            <div id="priorityEcho"><em>Your school priority will appear here.</em></div>
+          </div>
+
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend style="font-weight:800;margin-bottom:8px">What kind of connection do you have?</legend>
+            <div class="connection-options">
+              <label class="connection-option"><input type="radio" name="connectionType" value="experience"> <span><strong>I have an experience that connects.</strong><br><span class="hint">Practicum, coursework, student teaching, tutoring, work, volunteering, leadership, coaching, childcare, or another experience.</span></span></label>
+              <label class="connection-option"><input type="radio" name="connectionType" value="related"> <span><strong>I have a related skill or experience.</strong><br><span class="hint">It does not need to be an exact match.</span></span></label>
+              <label class="connection-option"><input type="radio" name="connectionType" value="learning"> <span><strong>I want to learn more about this.</strong><br><span class="hint">Curiosity can become a thoughtful interview or student-teaching question.</span></span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="personalConnection">My connection</label>
+            <textarea id="personalConnection" placeholder="Example: During practicum I planned small-group reading instruction and adjusted activities based on student responses."></textarea>
+            <div class="hint" id="experienceBankHint"></div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn ghost" type="button" data-back="2">← Back</button>
+            <button class="btn primary" type="button" data-next="4">Build my prep →</button>
+          </div>
+        </section>
+
+        <section class="panel step" id="step4" data-step="4">
+          <span class="eyebrow">Turn research into preparation</span>
+          <h2 id="pathTitle">Build what you'll actually use.</h2>
+          <p class="lede" id="pathLede"></p>
+
+          <div id="applicationPath" class="path-section" hidden>
+            <div class="path-card application">
+              <h3>Your school-specific tailoring note</h3>
+              <div class="auto"><strong>What matters here:</strong><div class="echo-priority"></div></div>
+              <div class="auto"><strong>What you bring:</strong><div class="echo-connection"></div></div>
+              <div class="field">
+                <label for="applicationEmphasis">What would you want this school to understand about you?</label>
+                <textarea id="applicationEmphasis" placeholder="Example: I can connect their focus on collaborative learning to the small-group instruction and student-centered planning I used in practicum."></textarea>
+              </div>
+              <div class="hint"><strong>Useful later:</strong> this can flow into your cover-letter or application-tailoring activity as a school-specific connection.</div>
+            </div>
+          </div>
+
+          <div id="interviewPath" class="path-section" hidden>
+            <div class="path-card interview">
+              <h3>Prepare 3 interview moments</h3>
+              <div class="field">
+                <label for="interviewWhy">If they ask “Why are you interested in our school?”</label>
+                <textarea id="interviewWhy" placeholder="What specific detail would you mention, and why does it genuinely interest you?"></textarea>
+              </div>
+              <div class="field">
+                <label for="interviewExample">An example I could use to show a connection</label>
+                <textarea id="interviewExample" placeholder="Choose an experience that helps them understand what you would bring."></textarea>
+              </div>
+              <div class="field">
+                <label for="interviewQuestion">A question I could ask them</label>
+                <textarea id="interviewQuestion" placeholder="Example: I noticed the school emphasizes family engagement. What does that look like most often at the classroom level?"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="studentPath" class="path-section" hidden>
+            <div class="path-card student">
+              <h3>Know enough to notice more once you're there</h3>
+              <div class="auto"><strong>Useful context:</strong><div class="echo-community"></div></div>
+              <div class="auto"><strong>Something they seem to prioritize:</strong><div class="echo-priority"></div></div>
+              <div class="field">
+                <label for="studentTeachingWatch">One thing I want to watch for in practice</label>
+                <textarea id="studentTeachingWatch" placeholder="Example: How teachers differentiate during whole-group instruction."></textarea>
+              </div>
+              <div class="field">
+                <label for="studentTeachingQuestion">One question I could ask my cooperating teacher</label>
+                <textarea id="studentTeachingQuestion" placeholder="Example: How do teachers here typically collaborate when planning for different learner needs?"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div id="explorePath" class="path-section" hidden>
+            <div class="path-card explore">
+              <h3>Use what you found to decide what to explore next</h3>
+              <div class="field">
+                <label for="fitAppeal">Something about this school that appeals to me</label>
+                <textarea id="fitAppeal"></textarea>
+              </div>
+              <div class="field">
+                <label for="fitQuestion">Something I would want to understand better</label>
+                <textarea id="fitQuestion"></textarea>
+              </div>
+              <div class="field">
+                <label for="fitFactor">Something that could affect whether this feels like a fit</label>
+                <textarea id="fitFactor"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn ghost" type="button" data-back="3">← Back</button>
+            <button class="btn gold" type="button" id="finishBtn">Build my School Prep Card →</button>
+          </div>
+        </section>
+
+        <section class="panel step" id="step5" data-step="5">
+          <span class="eyebrow">You're ready</span>
+          <h2>You did enough research to move forward.</h2>
+          <p class="lede">You now have the pieces that are most useful for this school — without turning research into another assignment.</p>
+
+          <div class="success">
+            <strong>Your school prep is saved for the other Education resources.</strong>
+            When the cover-letter, tailoring, or interview tools are connected to the same shared data layer, they can offer to pull these school-specific details in automatically.
+          </div>
+
+          <div class="final-grid">
+            <div class="final-tile"><strong>School</strong><div id="finalSchool"></div></div>
+            <div class="final-tile"><strong>Role / area</strong><div id="finalRole"></div></div>
+            <div class="final-tile"><strong>Who they serve</strong><div id="finalCommunity"></div></div>
+            <div class="final-tile"><strong>What seems important here</strong><div id="finalPriority"></div></div>
+            <div class="final-tile"><strong>My connection</strong><div id="finalConnection"></div></div>
+            <div class="final-tile"><strong>What I want to learn more about</strong><div id="finalCuriosity"></div></div>
+          </div>
+
+          <div class="path-card application" id="finalApplication" hidden>
+            <h3>For an application or cover letter</h3>
+            <p id="finalApplicationText"></p>
+          </div>
+          <div class="path-card interview" id="finalInterview" hidden>
+            <h3>For an interview</h3>
+            <p><strong>Why this school:</strong> <span id="finalInterviewWhy"></span></p>
+            <p><strong>Example to use:</strong> <span id="finalInterviewExample"></span></p>
+            <p><strong>Question to ask:</strong> <span id="finalInterviewQuestion"></span></p>
+          </div>
+          <div class="path-card student" id="finalStudent" hidden>
+            <h3>For student teaching / practicum</h3>
+            <p><strong>Watch for:</strong> <span id="finalStudentWatch"></span></p>
+            <p><strong>Ask:</strong> <span id="finalStudentQuestion"></span></p>
+          </div>
+          <div class="path-card explore" id="finalExplore" hidden>
+            <h3>For exploring fit</h3>
+            <p><strong>Appeals to me:</strong> <span id="finalFitAppeal"></span></p>
+            <p><strong>Learn more:</strong> <span id="finalFitQuestion"></span></p>
+            <p><strong>Could affect fit:</strong> <span id="finalFitFactor"></span></p>
+          </div>
+
+          <div class="buttons">
+            <button class="btn primary" type="button" onclick="window.print()">Print / Save my prep card</button>
+            <button class="btn ghost" type="button" data-back="4">Edit my answers</button>
+            <button class="btn gold" type="button" id="anotherBtn">Research another school</button>
+          </div>
+        </section>
+      </main>
+
+      <aside class="side" aria-label="Live school prep">
+        <div class="snapshot">
+          <div class="snapshot-top">
+            <h3 id="snapSchool">Your School Prep Card</h3>
+            <p id="snapRole">Your useful details will build here as you go.</p>
+          </div>
+          <div class="snapshot-body">
+            <div class="snap-group"><div class="snap-label">Who they serve</div><div class="snap-value snap-empty" id="snapCommunity">Add your first clue.</div></div>
+            <div class="snap-group"><div class="snap-label">What seems important</div><div class="snap-value snap-empty" id="snapPriority">Add a school priority.</div></div>
+            <div class="snap-group"><div class="snap-label">My connection</div><div class="snap-value snap-empty" id="snapConnection">Connect it to what you bring.</div></div>
+            <div class="snap-group"><div class="snap-label">I want to know</div><div class="snap-value snap-empty" id="snapCuriosity">Save something you're curious about.</div></div>
+          </div>
+        </div>
+
+        <div class="handoff">
+          <h3>Ready to carry forward</h3>
+          <p>Your school details can be reused instead of re-entered.</p>
+          <div class="handoff-item"><span class="dot" id="dotTailoring"></span>Application tailoring</div>
+          <div class="handoff-item"><span class="dot" id="dotCover"></span>Cover letter prep</div>
+          <div class="handoff-item"><span class="dot" id="dotInterview"></span>Interview prep</div>
+          <div class="handoff-item"><span class="dot" id="dotStudent"></span>Student teaching prep</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+
+(function (global) {
+  'use strict';
+
+  const STORAGE_KEY = 'uiowaEducationResourceData_v1';
+  const CHANNEL_NAME = 'uiowa-education-resources';
+
+  function now() {
+    return new Date().toISOString();
+  }
+
+  function blankStore() {
+    return {
+      version: 1,
+      updatedAt: now(),
+      schoolResearch: {
+        current: null,
+        saved: []
+      },
+      handoffs: {
+        tailoring: null,
+        coverLetter: null,
+        interview: null,
+        studentTeaching: null
+      }
+    };
+  }
+
+  function read() {
+    try {
+      const raw = global.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return blankStore();
+      const parsed = JSON.parse(raw);
+      const base = blankStore();
+      return {
+        ...base,
+        ...parsed,
+        schoolResearch: {
+          ...base.schoolResearch,
+          ...(parsed.schoolResearch || {})
+        },
+        handoffs: {
+          ...base.handoffs,
+          ...(parsed.handoffs || {})
+        }
+      };
+    } catch (error) {
+      console.warn('EducationResourceData: could not read shared data.', error);
+      return blankStore();
+    }
+  }
+
+  function notify(store, detail) {
+    try {
+      global.dispatchEvent(new CustomEvent('education-resource-data-updated', {
+        detail: detail || { updatedAt: store.updatedAt }
+      }));
+    } catch (_) {}
+
+    try {
+      if ('BroadcastChannel' in global) {
+        const channel = new BroadcastChannel(CHANNEL_NAME);
+        channel.postMessage(detail || { updatedAt: store.updatedAt });
+        channel.close();
+      }
+    } catch (_) {}
+  }
+
+  function write(store, detail) {
+    const next = {
+      ...store,
+      version: 1,
+      updatedAt: now()
+    };
+    global.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    notify(next, detail);
+    return next;
+  }
+
+  function get(path) {
+    const parts = Array.isArray(path) ? path : String(path || '').split('.').filter(Boolean);
+    let value = read();
+    for (const part of parts) {
+      if (value == null) return undefined;
+      value = value[part];
+    }
+    return value;
+  }
+
+  function set(path, value) {
+    const parts = Array.isArray(path) ? path : String(path || '').split('.').filter(Boolean);
+    if (!parts.length) return read();
+
+    const store = read();
+    let cursor = store;
+    for (let i = 0; i < parts.length - 1; i += 1) {
+      const key = parts[i];
+      if (!cursor[key] || typeof cursor[key] !== 'object' || Array.isArray(cursor[key])) {
+        cursor[key] = {};
+      }
+      cursor = cursor[key];
+    }
+    cursor[parts[parts.length - 1]] = value;
+    return write(store, { type: 'set', path: parts.join('.'), updatedAt: now() });
+  }
+
+  function upsertSchoolResearch(record) {
+    const store = read();
+    const clean = { ...record, updatedAt: now() };
+    store.schoolResearch.current = clean;
+
+    const saved = Array.isArray(store.schoolResearch.saved) ? store.schoolResearch.saved : [];
+    const index = saved.findIndex(item => item && item.id === clean.id);
+    if (index >= 0) saved[index] = clean;
+    else saved.unshift(clean);
+
+    store.schoolResearch.saved = saved.slice(0, 20);
+    return write(store, { type: 'school-research', id: clean.id, updatedAt: clean.updatedAt });
+  }
+
+  function publishHandoffs(record) {
+    const store = read();
+    const stamp = now();
+
+    const common = {
+      sourceTool: 'schoolResearch',
+      sourceId: record.id,
+      updatedAt: stamp,
+      schoolName: record.schoolName || '',
+      districtName: record.districtName || '',
+      role: record.role || '',
+      website: record.website || '',
+      studentCommunity: record.studentCommunity || '',
+      schoolPriority: record.schoolPriority || '',
+      curiosity: record.curiosity || '',
+      personalConnection: record.personalConnection || ''
+    };
+
+    store.handoffs.tailoring = {
+      ...common,
+      goal: 'tailoring',
+      emphasis: record.applicationEmphasis || '',
+      evidence: record.personalConnection || ''
+    };
+
+    store.handoffs.coverLetter = {
+      ...common,
+      goal: 'coverLetter',
+      schoolConnection: record.schoolPriority || '',
+      evidence: record.personalConnection || '',
+      emphasis: record.applicationEmphasis || ''
+    };
+
+    store.handoffs.interview = {
+      ...common,
+      goal: 'interview',
+      whyThisSchool: record.interviewWhy || '',
+      exampleToUse: record.interviewExample || record.personalConnection || '',
+      questionToAsk: record.interviewQuestion || ''
+    };
+
+    store.handoffs.studentTeaching = {
+      ...common,
+      goal: 'studentTeaching',
+      thingToWatchFor: record.studentTeachingWatch || '',
+      questionForCooperatingTeacher: record.studentTeachingQuestion || ''
+    };
+
+    store.schoolResearch.current = { ...record, updatedAt: stamp };
+    return write(store, { type: 'handoffs', sourceId: record.id, updatedAt: stamp });
+  }
+
+  function clearSchoolResearchCurrent() {
+    const store = read();
+    store.schoolResearch.current = null;
+    return write(store, { type: 'clear-school-research-current', updatedAt: now() });
+  }
+
+  global.EducationResourceData = {
+    STORAGE_KEY,
+    CHANNEL_NAME,
+    read,
+    write,
+    get,
+    set,
+    upsertSchoolResearch,
+    publishHandoffs,
+    clearSchoolResearchCurrent
+  };
+})(window);
+
+</script>
+  <script>
+    (() => {
+      'use strict';
+
+      const $ = (id) => document.getElementById(id);
+      const fields = [
+        'schoolName','districtName','role','website','studentCommunity','studentCommunityWhy',
+        'schoolPriority','curiosity','personalConnection','applicationEmphasis','interviewWhy',
+        'interviewExample','interviewQuestion','studentTeachingWatch','studentTeachingQuestion',
+        'fitAppeal','fitQuestion','fitFactor'
+      ];
+
+      const state = {
+        id: makeId(),
+        goal: '',
+        connectionType: '',
+        selectedPriorityIdeas: [],
+        step: 1
+      };
+
+      function makeId() {
+        return 'school-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8);
+      }
+
+      function value(id) {
+        return ($(id) && $(id).value || '').trim();
+      }
+
+      function record() {
+        const out = {
+          id: state.id,
+          goal: state.goal,
+          connectionType: state.connectionType,
+          selectedPriorityIdeas: [...state.selectedPriorityIdeas],
+          currentStep: state.step
+        };
+        fields.forEach(id => out[id] = value(id));
+        return out;
+      }
+
+      function save(silent = true) {
+        if (!window.EducationResourceData) return;
+        const rec = record();
+        window.EducationResourceData.upsertSchoolResearch(rec);
+        $('saveStatus').textContent = '● Saved on this device';
+        if (!silent) setTimeout(() => $('saveStatus').textContent = '● Saved on this device', 500);
+      }
+
+      function setText(id, text, fallback) {
+        const el = $(id);
+        if (!el) return;
+        const t = (text || '').trim();
+        el.textContent = t || fallback;
+        el.classList.toggle('snap-empty', !t);
+      }
+
+      function updateSnapshot() {
+        setText('snapSchool', value('schoolName'), 'Your School Prep Card');
+        setText('snapRole', value('role'), 'Your useful details will build here as you go.');
+        setText('snapCommunity', value('studentCommunity'), 'Add your first clue.');
+        setText('snapPriority', value('schoolPriority'), 'Add a school priority.');
+        setText('snapConnection', value('personalConnection'), 'Connect it to what you bring.');
+        setText('snapCuriosity', value('curiosity'), "Save something you're curious about.");
+
+        const hasSchool = !!value('schoolName');
+        const hasPriority = !!value('schoolPriority');
+        const hasConnection = !!value('personalConnection');
+        $('dotTailoring').classList.toggle('ready', hasSchool && hasPriority);
+        $('dotCover').classList.toggle('ready', hasSchool && hasPriority && hasConnection);
+        $('dotInterview').classList.toggle('ready', hasSchool && (hasPriority || value('curiosity')));
+        $('dotStudent').classList.toggle('ready', hasSchool && (!!value('studentCommunity') || hasPriority));
+      }
+
+      function showStep(step) {
+        state.step = step;
+        document.querySelectorAll('.step').forEach(el => el.classList.toggle('active', Number(el.dataset.step) === step));
+        $('progressBar').style.width = (step * 20) + '%';
+        const names = ['Choose your goal','Scan the school','Make a connection','Build your prep','Your School Prep Card'];
+        $('progressLabel').textContent = `Step ${step} of 5 · ${names[step-1]}`;
+        if (step === 3) {
+          $('priorityEcho').textContent = value('schoolPriority') || 'Choose the school clue you want to connect to.';
+          loadExperienceBankHint();
+        }
+        if (step === 4) renderPath();
+        if (step === 5) renderFinal();
+        save();
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+
+      function renderPath() {
+        document.querySelectorAll('.path-section').forEach(el => el.hidden = true);
+        document.querySelectorAll('.echo-priority').forEach(el => el.textContent = value('schoolPriority') || 'Add a school priority in Step 2.');
+        document.querySelectorAll('.echo-connection').forEach(el => el.textContent = value('personalConnection') || 'Add your connection in Step 3.');
+        document.querySelectorAll('.echo-community').forEach(el => el.textContent = value('studentCommunity') || 'Add a student/community clue in Step 2.');
+
+        const configs = {
+          application: ['applicationPath','Build your school-specific tailoring note.','You already did the research. Now decide what is worth emphasizing in your application.'],
+          interview: ['interviewPath','Prepare the moments where school research helps most.','Build one school-specific reason, one example, and one thoughtful question.'],
+          studentTeaching: ['studentPath',"Know enough to notice more once you're there.",'Use your research to create a small observation-and-question plan — not a script.'],
+          exploring: ['explorePath','Decide what you want to explore next.','Use what you found to name what appeals to you, what is unclear, and what could affect fit.']
+        };
+        const c = configs[state.goal] || configs.application;
+        $(c[0]).hidden = false;
+        $('pathTitle').textContent = c[1];
+        $('pathLede').textContent = c[2];
+      }
+
+      function renderFinal() {
+        const rec = record();
+        if (window.EducationResourceData) {
+          window.EducationResourceData.publishHandoffs(rec);
+        }
+
+        setText('finalSchool', [rec.schoolName, rec.districtName].filter(Boolean).join(' · '), 'Not entered');
+        setText('finalRole', rec.role, 'Not entered');
+        setText('finalCommunity', rec.studentCommunity, 'Not entered');
+        setText('finalPriority', rec.schoolPriority, 'Not entered');
+        setText('finalConnection', rec.personalConnection, 'Not entered');
+        setText('finalCuriosity', rec.curiosity, 'Not entered');
+
+        ['finalApplication','finalInterview','finalStudent','finalExplore'].forEach(id => $(id).hidden = true);
+
+        if (state.goal === 'application') {
+          $('finalApplication').hidden = false;
+          setText('finalApplicationText', rec.applicationEmphasis, 'Use your school priority + your evidence as the basis for tailoring.');
+        } else if (state.goal === 'interview') {
+          $('finalInterview').hidden = false;
+          setText('finalInterviewWhy', rec.interviewWhy, 'Not entered');
+          setText('finalInterviewExample', rec.interviewExample || rec.personalConnection, 'Not entered');
+          setText('finalInterviewQuestion', rec.interviewQuestion, 'Not entered');
+        } else if (state.goal === 'studentTeaching') {
+          $('finalStudent').hidden = false;
+          setText('finalStudentWatch', rec.studentTeachingWatch, 'Not entered');
+          setText('finalStudentQuestion', rec.studentTeachingQuestion, 'Not entered');
+        } else {
+          $('finalExplore').hidden = false;
+          setText('finalFitAppeal', rec.fitAppeal, 'Not entered');
+          setText('finalFitQuestion', rec.fitQuestion, 'Not entered');
+          setText('finalFitFactor', rec.fitFactor, 'Not entered');
+        }
+      }
+
+      function validateStep(step) {
+        if (step === 1) {
+          if (!state.goal) return fail('Choose what you are getting ready for.');
+          if (!value('schoolName')) return fail('Add the school or district you are researching.');
+        }
+        if (step === 2) {
+          if (!value('studentCommunity') || !value('schoolPriority') || !value('curiosity')) {
+            return fail('Add one useful clue in each section before moving on.');
+          }
+        }
+        if (step === 3 && !value('personalConnection')) {
+          return fail('Add a connection, related strength, or what you want to learn.');
+        }
+        return true;
+      }
+
+      function fail(message) {
+        alert(message);
+        return false;
+      }
+
+      function loadExperienceBankHint() {
+        const hint = $('experienceBankHint');
+        try {
+          const raw = localStorage.getItem('uiowaEducationExperienceBank_v1');
+          if (!raw) {
+            hint.textContent = 'Tip: a practicum, job, volunteer role, leadership experience, or class project can all count.';
+            return;
+          }
+          const bank = JSON.parse(raw);
+          let entries = [];
+          if (Array.isArray(bank)) entries = bank;
+          else if (Array.isArray(bank.experiences)) entries = bank.experiences;
+          else if (Array.isArray(bank.items)) entries = bank.items;
+
+          const names = entries
+            .map(x => x && (x.title || x.role || x.name || x.experienceTitle))
+            .filter(Boolean)
+            .slice(0,3);
+
+          hint.textContent = names.length
+            ? `You already have Education experiences saved in this browser. Think about whether one of these could connect: ${names.join(' · ')}.`
+            : 'You already have Education experience information saved in this browser. One of those experiences may give you evidence for this connection.';
+        } catch (_) {
+          hint.textContent = 'Tip: a practicum, job, volunteer role, leadership experience, or class project can all count.';
+        }
+      }
+
+      function resetCurrent() {
+        if (!confirm('Start research for another school? Your completed school stays in saved Education Resource Data.')) return;
+        state.id = makeId();
+        state.goal = '';
+        state.connectionType = '';
+        state.selectedPriorityIdeas = [];
+        state.step = 1;
+
+        fields.forEach(id => { if ($(id)) $(id).value = ''; });
+        document.querySelectorAll('.choice').forEach(el => {el.classList.remove('selected'); el.setAttribute('aria-checked','false');});
+        document.querySelectorAll('.chip').forEach(el => el.setAttribute('aria-pressed','false'));
+        document.querySelectorAll('input[name="connectionType"]').forEach(el => el.checked = false);
+        if (window.EducationResourceData) window.EducationResourceData.clearSchoolResearchCurrent();
+        updateSnapshot();
+        showStep(1);
+      }
+
+      function restore() {
+        if (!window.EducationResourceData) return;
+        const saved = window.EducationResourceData.get('schoolResearch.current');
+        if (!saved || !saved.id) return;
+
+        state.id = saved.id;
+        state.goal = saved.goal || '';
+        state.connectionType = saved.connectionType || '';
+        state.selectedPriorityIdeas = Array.isArray(saved.selectedPriorityIdeas) ? saved.selectedPriorityIdeas : [];
+        state.step = Math.min(Math.max(Number(saved.currentStep) || 1, 1), 5);
+
+        fields.forEach(id => { if ($(id) && saved[id] != null) $(id).value = saved[id]; });
+        document.querySelectorAll('.choice').forEach(el => {
+          const selected = el.dataset.goal === state.goal;
+          el.classList.toggle('selected', selected);
+          el.setAttribute('aria-checked', selected ? 'true' : 'false');
+        });
+        document.querySelectorAll('.chip').forEach(el => {
+          el.setAttribute('aria-pressed', state.selectedPriorityIdeas.includes(el.textContent.trim()) ? 'true' : 'false');
+        });
+        const radio = document.querySelector(`input[name="connectionType"][value="${CSS.escape(state.connectionType)}"]`);
+        if (radio) radio.checked = true;
+        updateSnapshot();
+        showStep(state.step);
+      }
+
+      document.querySelectorAll('.choice').forEach(el => {
+        el.addEventListener('click', () => {
+          state.goal = el.dataset.goal;
+          document.querySelectorAll('.choice').forEach(x => {
+            const selected = x === el;
+            x.classList.toggle('selected', selected);
+            x.setAttribute('aria-checked', selected ? 'true' : 'false');
+          });
+          save();
+        });
+      });
+
+      document.querySelectorAll('.chip').forEach(el => {
+        el.addEventListener('click', () => {
+          const label = el.textContent.trim();
+          const active = el.getAttribute('aria-pressed') === 'true';
+          el.setAttribute('aria-pressed', active ? 'false' : 'true');
+          state.selectedPriorityIdeas = active
+            ? state.selectedPriorityIdeas.filter(x => x !== label)
+            : [...new Set([...state.selectedPriorityIdeas, label])];
+          save();
+        });
+      });
+
+      document.querySelectorAll('input[name="connectionType"]').forEach(el => {
+        el.addEventListener('change', () => {
+          if (el.checked) state.connectionType = el.value;
+          save();
+        });
+      });
+
+      fields.forEach(id => {
+        const el = $(id);
+        if (!el) return;
+        el.addEventListener('input', () => {
+          updateSnapshot();
+          clearTimeout(el._saveTimer);
+          el._saveTimer = setTimeout(() => save(), 250);
+        });
+      });
+
+      document.querySelectorAll('[data-next]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const current = Number(btn.closest('.step').dataset.step);
+          if (validateStep(current)) showStep(Number(btn.dataset.next));
+        });
+      });
+
+      document.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', () => showStep(Number(btn.dataset.back)));
+      });
+
+      $('finishBtn').addEventListener('click', () => showStep(5));
+      $('startOverBtn').addEventListener('click', resetCurrent);
+      $('anotherBtn').addEventListener('click', resetCurrent);
+
+      updateSnapshot();
+      restore();
+    })();
+  </script>
+</body>
+</html>
